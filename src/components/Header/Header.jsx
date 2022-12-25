@@ -1,8 +1,22 @@
 import React, { useState } from "react";
-import styles from "./styles/Header.module.scss";
+import Cart from "../Cart/Cart";
+import styles from "./Header.module.scss";
 
-const Header = () => {
-  const [price, setPrice] = useState(1029);
+const Header = ({ currentPrice }) => {
+  const [openCart, setOpenCart] = useState(false);
+
+  const onOpenCart = () => {
+    setOpenCart(!openCart);
+    if (!openCart) {
+      document.body.style.overflow = "hidden";
+      document.body.style.marginRight = "17px";
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -16,7 +30,7 @@ const Header = () => {
         </div>
 
         <div className={styles.option}>
-          <div className={styles.priceBlock}>
+          <div className={styles.priceBlock} onClick={onOpenCart}>
             <svg
               className={styles.cart}
               width="20"
@@ -48,7 +62,7 @@ const Header = () => {
               />
             </svg>
 
-            <span className={styles.price}>{price} руб.</span>
+            <span className={styles.price}>{currentPrice} руб.</span>
           </div>
 
           <svg
@@ -82,6 +96,8 @@ const Header = () => {
           </svg>
         </div>
       </div>
+
+      {openCart && <Cart setOpenCart={setOpenCart} />}
     </header>
   );
 };

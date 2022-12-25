@@ -1,0 +1,43 @@
+.cartItem {
+    display: flex;
+    align-items: center;
+    width: 325px;
+    height: 119px;
+    margin-bottom: 1.25rem;
+    padding: 1.25rem 1.25rem 1.87rem;
+    border: 1px solid #f3f3f3;
+    border-radius: 20px;
+
+    .cartImg {
+        width: 123px;
+        height: 70px;
+        margin-right: 1.31rem;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .info {
+        max-width: 150px;
+        margin-right: 0.75rem;
+
+        .description {
+            margin-top: 0.7rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.87rem;
+            color: #000000;
+            font-weight: normal;
+        }
+
+        .price {
+            font-size: 0.87rem;
+            color: #000000;
+            font-weight: bold;
+        }
+    }
+
+    .deleteBtn {
+        cursor: pointer;
+    }
+}
