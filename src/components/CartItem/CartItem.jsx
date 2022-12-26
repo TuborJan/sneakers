@@ -4,12 +4,10 @@ import { Context } from "../../Context/context";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ item }) => {
-  const { setAddedItems, updateData, setUpdateData } = useContext(Context);
+  const { setAddedItems } = useContext(Context);
 
   const deleteItem = (id) => {
-    console.log(id);
     axios.delete(`https://63a57287318b23efa793b328.mockapi.io/Cart/${id}`);
-    setUpdateData(!updateData);
     setAddedItems((prev) => prev.filter((item) => item.id !== id));
   };
 

@@ -1,10 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../Context/context";
 import Card from "../Card/Card";
 import styles from "./Items.module.scss";
 
 const Shop = ({ items, error }) => {
   const { addedItems } = useContext(Context);
+
+  const isItemAdded = (id) => {
+    return addedItems.some((obj) => obj.parentid === id);
+  };
 
   return (
     <div className={styles.shop}>
@@ -18,11 +22,7 @@ const Shop = ({ items, error }) => {
           <h1 className={styles.error}>{error.message}</h1>
         ) : (
           items.map((item, index) => (
-            <Card
-              key={index}
-              item={item}
-              isAdded={addedItems.some((obj) => obj.parentid === item.parentid)}
-            />
+            <Card key={index} item={item} isItemAdded={isItemAdded} />
           ))
         )}
       </div>

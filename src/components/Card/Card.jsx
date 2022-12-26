@@ -3,25 +3,17 @@ import React, { useState, useContext } from "react";
 import { Context } from "../../Context/context";
 import styles from "./Card.module.scss";
 
-const Card = ({ item, isAdded = false }) => {
-  const [favBtn, setFavBtn] = useState(false);
-  const [addBtnItem, setAddBtnItem] = useState(isAdded);
+const Card = ({ item, isItemAdded }) => {
+  const { addedItems, setAddedItems, updateData, setUpdateData } =
+    useContext(Context);
 
-  const {
-    addedItems,
-    setAddedItems,
-    currentPrice,
-    setCurrentPrice,
-    updateData,
-    setUpdateData,
-  } = useContext(Context);
+  const [favBtn, setFavBtn] = useState(false);
 
   const activeFavorite = () => {
     setFavBtn(!favBtn);
   };
 
   const addToCart = (item) => {
-    setAddBtnItem(!addBtnItem);
     if (
       addedItems.find((obj) => Number(obj.parentid) === Number(item.parentid))
     ) {
@@ -32,14 +24,12 @@ const Card = ({ item, isAdded = false }) => {
           );
         }
       });
-      setCurrentPrice(currentPrice - item.price);
       setAddedItems((prev) =>
         prev.filter((obj) => Number(obj.id) !== Number(item.parentid))
       );
       setUpdateData(!updateData);
     } else {
       axios.post("https://63a57287318b23efa793b328.mockapi.io/Cart", item);
-      setCurrentPrice(currentPrice + item.price);
       setAddedItems((prev) => [...prev, item]);
       setUpdateData(!updateData);
     }
@@ -47,7 +37,11 @@ const Card = ({ item, isAdded = false }) => {
 
   return (
     <div
-      className={addBtnItem ? `${styles.active} ${styles.card}` : styles.card}
+      className={
+        isItemAdded(item.parentid)
+          ? `${styles.active} ${styles.card}`
+          : styles.card
+      }
     >
       <div
         className={styles.img}
@@ -71,7 +65,9 @@ const Card = ({ item, isAdded = false }) => {
           </p>
           <img
             onClick={() => addToCart(item)}
-            src={addBtnItem ? "/img/addactive.png" : "/img/add.svg"}
+            src={
+              isItemAdded(item.parentid) ? "/img/addactive.png" : "/img/add.svg"
+            }
             alt="add btn"
           />
         </div>

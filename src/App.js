@@ -8,10 +8,10 @@ import { Context } from "./Context/context.js";
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
 
-  //Обновить данные с сервера
+  //Update data
   const [updateData, setUpdateData] = useState(false);
 
-  //Получить данные с сервака
+  //Data from server
   const [items, setItems] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
 
@@ -37,6 +37,19 @@ function App() {
     fetchData();
   }, [updateData]);
 
+  //Update total price
+  useEffect(() => {
+    function updatePrice() {
+      let price = 0;
+      for (let item of addedItems) {
+        price += item.price;
+      }
+      setCurrentPrice(price);
+    }
+
+    updatePrice();
+  });
+
   return (
     <Context.Provider
       value={{
@@ -49,7 +62,7 @@ function App() {
       }}
     >
       <div className={styles.App}>
-        <Header currentPrice={currentPrice} errorCart={errorCart} />
+        <Header errorCart={errorCart} />
         <main className={styles.container}>
           <Shop items={items} error={errorCard} />;
         </main>
