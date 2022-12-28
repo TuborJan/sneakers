@@ -25,7 +25,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <a href="/" className={styles.logo}>
-          <img src="/img/logo.png" alt="logo" />
+          <img src="img/logo.png" alt="logo" />
           <div className={styles.text}>
             <h2>React sneakers</h2>
             Магазин лучших кросовок

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Shop from "./components/Shop/Shop";
 import Header from "./components/Header/Header";
 import styles from "./styles/App.module.scss";
 import { Context } from "./Context/context.js";
+import { fetchItemsData } from "./components/API/Requests";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
-
-  //Update data
-  const [updateData, setUpdateData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Data from server
   const [items, setItems] = useState([]);
@@ -20,22 +18,16 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const responseItems = await axios.get(
-        "https://63a57287318b23efa793b328.mockapi.io/items"
-      );
-      const responseCart = await axios.get(
-        "https://63a57287318b23efa793b328.mockapi.io/Cart"
-      );
+      setIsLoading(true);
 
-      setAddedItems(responseCart.data);
-      setErrorCart(responseCart.error);
+      await fetchItemsData("Cart", setAddedItems, setErrorCart);
+      await fetchItemsData("items", setItems, setErrorCard);
 
-      setItems(responseItems.data);
-      setErrorCard(responseItems.error);
+      setIsLoading(false);
     }
 
     fetchData();
-  }, [updateData]);
+  }, []);
 
   //Update total price
   useEffect(() => {
@@ -57,14 +49,15 @@ function App() {
         setCurrentPrice,
         addedItems,
         setAddedItems,
-        updateData,
-        setUpdateData,
+        // updateData,
+        // setUpdateData,
+        setErrorCart,
       }}
     >
       <div className={styles.App}>
         <Header errorCart={errorCart} />
         <main className={styles.container}>
-          <Shop items={items} error={errorCard} />;
+          <Shop items={items} error={errorCard} isLoading={isLoading} />
         </main>
       </div>
     </Context.Provider>

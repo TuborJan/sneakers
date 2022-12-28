@@ -39,10 +39,11 @@
     }
 
     .notAnEmpty {
+        height: 94%;
         margin-top: 1.87rem;
 
         .cartItems {
-            height: 750px;
+            height: 85%;
         }
 
         .scrollbar {
@@ -52,7 +53,8 @@
 
         .price {
             display: flex;
-            margin-top: 1.87rem;
+            max-width: 325px;
+            margin-top: 1.5rem;
 
             p {
                 font-size: 1rem;
@@ -74,6 +76,7 @@
 
         .orderbutton {
             margin-top: 1.5rem;
+            max-width: 325px;
 
             button {
                 display: flex;

@@ -29,9 +29,13 @@
         }
     }
 
-    .items {
+    .ContentLoader {
         display: flex;
         justify-content: space-between;
+    }
+
+    .items {
+        display: flex;
         flex-wrap: wrap;
 
         h1 {

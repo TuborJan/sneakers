@@ -15,11 +15,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
   return (
     <div className={styles.modal} onClick={closeModal}>
       <div
-        className={
-          addedItems.length < 6
-            ? `${styles.cart}`
-            : `${styles.cart} ${styles.cartscroll}`
-        }
+        className={`${styles.cart} ${styles.cartscroll}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.header}>
@@ -28,13 +24,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
         </div>
         {addedItems.length > 0 ? (
           <div className={styles.notAnEmpty}>
-            <div
-              className={
-                addedItems.length < 6
-                  ? `${styles.cartItems}`
-                  : `${styles.cartItems} ${styles.scrollbar}`
-              }
-            >
+            <div className={`${styles.cartItems} ${styles.scrollbar}`}>
               {addedItems.map((item, index) => (
                 <CartItem item={item} key={index} />
               ))}
@@ -47,7 +37,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
             </div>
             <div className={styles.orderbutton}>
               <button>
-                Вернуться назад
+                Оформить заказ
                 <span className={styles.arrow}>
                   <img src="img/arrow.png" alt="arrow" />
                 </span>{" "}
