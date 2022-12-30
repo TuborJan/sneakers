@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../../Context/context";
 import Cart from "../Cart/Cart";
 import styles from "./Header.module.scss";
@@ -12,7 +13,7 @@ const Header = () => {
     setOpenCart(!openCart);
     if (!openCart) {
       document.body.style.overflow = "hidden";
-      document.body.style.marginRight = "17px";
+      document.body.style.marginRight = "5px";
       window.scrollTo({
         top: 0,
         left: 0,
@@ -24,13 +25,13 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <a href="/" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <img src="img/logo.png" alt="logo" />
           <div className={styles.text}>
             <h2>React sneakers</h2>
             Магазин лучших кросовок
           </div>
-        </a>
+        </Link>
 
         <div className={styles.option}>
           <div className={styles.priceBlock} onClick={onOpenCart}>
@@ -68,7 +69,7 @@ const Header = () => {
             <span className={styles.price}>{currentPrice} руб.</span>
           </div>
 
-          <a href="/" className={styles.favorite}>
+          <Link to="/favorite" className={styles.favorite}>
             <svg
               width="22"
               height="19"
@@ -81,9 +82,9 @@ const Header = () => {
                 fill="#9B9B9B"
               />
             </svg>
-          </a>
+          </Link>
 
-          <a href="/" className={styles.profile}>
+          <Link to="/profile" className={styles.profile}>
             <svg
               width="20"
               height="20"
@@ -98,7 +99,7 @@ const Header = () => {
                 fill="#9B9B9B"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
 

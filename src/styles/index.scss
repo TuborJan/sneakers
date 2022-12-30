@@ -5,6 +5,15 @@
     scroll-behavior: smooth;
 }
 
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #9dd458;
+    border-radius: 20px;
+}
+
 body {
     background-color: #e7f6ff;
 }

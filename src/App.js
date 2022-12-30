@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Shop from "./components/Shop/Shop";
-import Header from "./components/Header/Header";
-import styles from "./styles/App.module.scss";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Context } from "./Context/context.js";
 import { fetchItemsData } from "./components/API/Requests";
+import Layout from "./components/Layout/Layout.jsx";
+import Shop from "./components/Shop/Shop";
+import Favorite from "./components/Favorite/Favorite.jsx";
+import Profile from "./Profile/Profile.jsx";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -13,15 +15,14 @@ function App() {
   const [items, setItems] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
 
-  const [errorCard, setErrorCard] = useState("");
-  const [errorCart, setErrorCart] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
 
-      await fetchItemsData("Cart", setAddedItems, setErrorCart);
-      await fetchItemsData("items", setItems, setErrorCard);
+      await fetchItemsData("items", setItems, setError);
+      await fetchItemsData("Cart", setAddedItems, setError);
 
       setIsLoading(false);
     }
@@ -49,17 +50,22 @@ function App() {
         setCurrentPrice,
         addedItems,
         setAddedItems,
-        // updateData,
-        // setUpdateData,
-        setErrorCart,
       }}
     >
-      <div className={styles.App}>
-        <Header errorCart={errorCart} />
-        <main className={styles.container}>
-          <Shop items={items} error={errorCard} isLoading={isLoading} />
-        </main>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <Shop items={items} error={error} isLoading={isLoading} />
+              }
+            />
+            <Route path="favorite" element={<Favorite />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Context.Provider>
   );
 }

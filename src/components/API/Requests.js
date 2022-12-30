@@ -10,10 +10,11 @@ export async function deleteData(from, item) {
   );
 }
 
-export async function fetchItemsData(from, to, error) {
-  const response = await axios.get(
-    `https://63a57287318b23efa793b328.mockapi.io/${from}`
-  );
+export async function fetchItemsData(from, to, setError) {
+  const response = await axios
+    .get(`https://63a57287318b23efa793b328.mockapi.io/${from}`)
+    .catch((error) => {
+      setError(error.message);
+    });
   to(response.data);
-  error(response.error);
 }

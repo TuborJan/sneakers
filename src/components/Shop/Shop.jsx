@@ -20,26 +20,16 @@ const Shop = ({ items, error, isLoading }) => {
     items = items.filter((item) =>
       item.description.toLowerCase().includes(searchValue.toLowerCase())
     );
-    console.log(items.length);
-    if (items.length < 9) {
-      document.body.style.marginRight = "17px";
-    } else {
-      document.body.style.marginRight = "0px";
-    }
     return (
       <div className={styles.items}>
-        {error ? (
-          <h1 className={styles.error}>{error.message}</h1>
-        ) : (
-          (isLoading ? [...Array(12)] : items).map((item, index) => (
-            <Card
-              key={index}
-              item={item}
-              isItemAdded={isItemAdded}
-              isLoading={isLoading}
-            />
-          ))
-        )}
+        {(isLoading ? [...Array(12)] : items).map((item, index) => (
+          <Card
+            key={index}
+            item={item}
+            isItemAdded={isItemAdded}
+            isLoading={isLoading}
+          />
+        ))}
       </div>
     );
   };
@@ -55,7 +45,7 @@ const Shop = ({ items, error, isLoading }) => {
         />
       </div>
 
-      {renderItems()}
+      {error ? <h1 className={styles.error}>{error}</h1> : renderItems()}
     </div>
   );
 };
