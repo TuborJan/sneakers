@@ -5,7 +5,7 @@ import { fetchItemsData } from "./components/API/Requests";
 import Layout from "./components/Layout/Layout.jsx";
 import Shop from "./components/Shop/Shop";
 import Favorite from "./components/Favorite/Favorite.jsx";
-import Profile from "./Profile/Profile.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -14,6 +14,7 @@ function App() {
   //Data from server
   const [items, setItems] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
+  const [addedFavorite, setAddedFavorite] = useState([]);
 
   const [error, setError] = useState("");
 
@@ -22,7 +23,8 @@ function App() {
       setIsLoading(true);
 
       await fetchItemsData("items", setItems, setError);
-      await fetchItemsData("Cart", setAddedItems, setError);
+      await fetchItemsData("cart", setAddedItems, setError);
+      await fetchItemsData("favorite", setAddedFavorite, setError);
 
       setIsLoading(false);
     }
@@ -50,6 +52,9 @@ function App() {
         setCurrentPrice,
         addedItems,
         setAddedItems,
+        addedFavorite,
+        setAddedFavorite,
+        setError,
       }}
     >
       <BrowserRouter>

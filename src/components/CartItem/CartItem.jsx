@@ -1,13 +1,13 @@
-import axios from "axios";
 import React, { useContext } from "react";
 import { Context } from "../../Context/context";
+import { deleteData } from "../API/Requests";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ item }) => {
   const { setAddedItems } = useContext(Context);
 
   const deleteItem = (id) => {
-    axios.delete(`https://63a57287318b23efa793b328.mockapi.io/Cart/${id}`);
+    deleteData("cart", id);
     setAddedItems((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -23,7 +23,7 @@ const CartItem = ({ item }) => {
       <div className={styles.deleteBtn}>
         <img
           onClick={() => deleteItem(item.id)}
-          src="img/exitbtn.png"
+          src="https://i.postimg.cc/MHkS9tXK/exitbtn.png"
           alt="delete button"
         />
       </div>

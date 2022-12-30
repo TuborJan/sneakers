@@ -5,10 +5,14 @@ import styles from "./shop.module.scss";
 
 const Shop = ({ items, error, isLoading }) => {
   const [searchValue, setSearchValue] = useState("");
-  const { addedItems } = useContext(Context);
+  const { addedItems, addedFavorite } = useContext(Context);
 
   const isItemAdded = (id) => {
     return addedItems.some((obj) => obj.parentid === id);
+  };
+
+  const isItemFavorite = (id) => {
+    return addedFavorite.some((obj) => obj.parentid === id);
   };
 
   const changeSearchInput = (event) => {
@@ -22,10 +26,11 @@ const Shop = ({ items, error, isLoading }) => {
     );
     return (
       <div className={styles.items}>
-        {(isLoading ? [...Array(12)] : items).map((item, index) => (
+        {(isLoading ? [...Array(8)] : items).map((item, index) => (
           <Card
             key={index}
             item={item}
+            isItemFavorite={isItemFavorite}
             isItemAdded={isItemAdded}
             isLoading={isLoading}
           />

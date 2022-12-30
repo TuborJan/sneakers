@@ -1,40 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../Context/context";
-import styles from "./Card.module.scss";
+import { addToCart, addToFavorite } from "../../functions/addItems";
 import ContentLoader from "react-content-loader";
-import { fetchItemsData, postData, deleteData } from "../API/Requests";
+import styles from "./Card.module.scss";
 
-const Card = ({ item, isItemAdded, isLoading = true }) => {
-  const { addedItems, setAddedItems, setErrorCart } = useContext(Context);
-
-  const [favBtn, setFavBtn] = useState(false);
-
-  const activeFavorite = () => {
-    setFavBtn(!favBtn);
-  };
-
-  const addToCart = (item) => {
-    if (
-      addedItems.find((obj) => Number(obj.parentid) === Number(item.parentid))
-    ) {
-      for (let obj of addedItems) {
-        if (Number(obj.parentid) === Number(item.parentid)) {
-          async function serverRequestUpdate() {
-            await deleteData("Cart", obj.id);
-            await fetchItemsData("Cart", setAddedItems, setErrorCart);
-          }
-          serverRequestUpdate();
-          break;
-        }
-      }
-    } else {
-      async function serverRequestUpdate() {
-        await postData("Cart", item);
-        await fetchItemsData("Cart", setAddedItems, setErrorCart);
-      }
-      serverRequestUpdate();
-    }
-  };
+const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
+  const {
+    addedItems,
+    setAddedItems,
+    addedFavorite,
+    setAddedFavorite,
+    setError,
+  } = useContext(Context);
 
   return (
     <div className={styles.item}>
@@ -72,8 +49,14 @@ const Card = ({ item, isItemAdded, isLoading = true }) => {
               }}
             >
               <img
-                onClick={activeFavorite}
-                src={favBtn ? "img/favorite.svg" : "img/unfavorite.png"}
+                onClick={() =>
+                  addToFavorite(item, addedFavorite, setAddedFavorite, setError)
+                }
+                src={
+                  isItemFavorite(item.parentid)
+                    ? "https://i.postimg.cc/L6tHbdtd/favorite.png"
+                    : "https://i.postimg.cc/sfSyMF0B/unfavorite.png"
+                }
                 alt="favorite icon"
               />
             </div>
@@ -85,11 +68,13 @@ const Card = ({ item, isItemAdded, isLoading = true }) => {
                   <span className={styles.bolder}>{`${item.price} руб.`}</span>
                 </p>
                 <img
-                  onClick={() => addToCart(item)}
+                  onClick={() =>
+                    addToCart(item, addedItems, setAddedItems, setError)
+                  }
                   src={
                     isItemAdded(item.parentid)
-                      ? "img/addactive.png"
-                      : "img/add.svg"
+                      ? "https://i.postimg.cc/T3TR8k0K/addactive.png"
+                      : "https://i.postimg.cc/nLzprC6Z/add.png"
                   }
                   alt="add btn"
                 />

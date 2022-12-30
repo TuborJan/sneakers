@@ -20,7 +20,11 @@ const Cart = ({ setOpenCart, currentPrice }) => {
       >
         <div className={styles.header}>
           <h2>Корзина</h2>
-          <img src="img/exitbtn.png" alt="exit" onClick={closeModal} />
+          <img
+            src="https://i.postimg.cc/MHkS9tXK/exitbtn.png"
+            alt="exit"
+            onClick={closeModal}
+          />
         </div>
         {addedItems.length > 0 ? (
           <div className={styles.notAnEmpty}>
@@ -39,7 +43,10 @@ const Cart = ({ setOpenCart, currentPrice }) => {
               <button>
                 Оформить заказ
                 <span className={styles.arrow}>
-                  <img src="img/arrow.png" alt="arrow" />
+                  <img
+                    src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
+                    alt="arrow"
+                  />
                 </span>{" "}
               </button>
             </div>
@@ -47,7 +54,10 @@ const Cart = ({ setOpenCart, currentPrice }) => {
         ) : (
           <div className={styles.empty}>
             <div className={styles.emptyimg}>
-              <img src="img/emptybox.png" alt="empty box" />
+              <img
+                src="https://i.postimg.cc/qq8dSnCc/emptybox.png"
+                alt="empty box"
+              />
             </div>
             <div className={styles.emptyheader}>
               <h2>Корзина пустая</h2>
@@ -58,7 +68,10 @@ const Cart = ({ setOpenCart, currentPrice }) => {
             <div className={styles.button}>
               <button onClick={closeModal}>
                 <span className={styles.arrow}>
-                  <img src="img/arrow.png" alt="arrow" />
+                  <img
+                    src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
+                    alt="arrow"
+                  />
                 </span>{" "}
                 Вернуться назад
               </button>
