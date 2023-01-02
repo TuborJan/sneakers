@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Context } from "../../Context/context";
-import { addToCart, addToFavorite } from "../../functions/addItems";
+import { Context } from "../../../Context/context";
+import { addToServer } from "../../../functions/addItems";
 import styles from "./FavoriteItems.module.scss";
 
 const FavoriteItems = ({ item, isItemAdded }) => {
@@ -31,7 +31,13 @@ const FavoriteItems = ({ item, isItemAdded }) => {
           >
             <img
               onClick={() =>
-                addToFavorite(item, addedFavorite, setAddedFavorite, setError)
+                addToServer(
+                  item,
+                  addedFavorite,
+                  setAddedFavorite,
+                  setError,
+                  "favorite"
+                )
               }
               src={"https://i.postimg.cc/L6tHbdtd/favorite.png"}
               alt="favorite icon"
@@ -46,7 +52,7 @@ const FavoriteItems = ({ item, isItemAdded }) => {
               </p>
               <img
                 onClick={() =>
-                  addToCart(item, addedItems, setAddedItems, setError)
+                  addToServer(item, addedItems, setAddedItems, setError, "cart")
                 }
                 src={
                   isItemAdded(item.parentid)

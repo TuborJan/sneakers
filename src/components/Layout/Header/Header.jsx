@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../Context/context";
-import Cart from "../Cart/Cart";
+import Cart from "../Header/Cart/Cart";
 import styles from "./Header.module.scss";
 
 const Header = () => {

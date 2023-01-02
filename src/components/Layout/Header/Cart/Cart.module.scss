@@ -128,12 +128,32 @@
             }
         }
 
+        .purchaseImg {
+            width: 120px;
+            margin: 0 auto;
+            margin-bottom: 1.85rem;
+
+            img {
+                width: 100%;
+            }
+        }
+
         .emptyheader {
             margin-bottom: 0.56rem;
 
             h2 {
                 font-size: 1.37rem;
                 font-weight: 700;
+            }
+        }
+
+        .purchaseHeader {
+            margin-bottom: 0.56rem;
+
+            h2 {
+                font-size: 1.37rem;
+                font-weight: 700;
+                color: #87c202;
             }
         }
 

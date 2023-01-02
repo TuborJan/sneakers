@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Context } from "../../Context/context";
-import { addToCart, addToFavorite } from "../../functions/addItems";
+import { Context } from "../../../Context/context";
+import { addToServer } from "../../../functions/addItems";
 import ContentLoader from "react-content-loader";
 import styles from "./Card.module.scss";
 
@@ -50,7 +50,13 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
             >
               <img
                 onClick={() =>
-                  addToFavorite(item, addedFavorite, setAddedFavorite, setError)
+                  addToServer(
+                    item,
+                    addedFavorite,
+                    setAddedFavorite,
+                    setError,
+                    "favorite"
+                  )
                 }
                 src={
                   isItemFavorite(item.parentid)
@@ -69,7 +75,13 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
                 </p>
                 <img
                   onClick={() =>
-                    addToCart(item, addedItems, setAddedItems, setError)
+                    addToServer(
+                      item,
+                      addedItems,
+                      setAddedItems,
+                      setError,
+                      "cart"
+                    )
                   }
                   src={
                     isItemAdded(item.parentid)

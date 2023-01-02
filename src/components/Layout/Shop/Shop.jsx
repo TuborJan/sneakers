@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../Context/context";
-import Card from "../Card/Card";
+import Card from "./Card/Card";
 import styles from "./shop.module.scss";
 
 const Shop = ({ items, error, isLoading }) => {

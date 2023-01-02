@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Context } from "../../Context/context";
-import { deleteData } from "../API/Requests";
+import { Context } from "../../../../Context/context";
+import { deleteData } from "../../../../API/Requests";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ item }) => {

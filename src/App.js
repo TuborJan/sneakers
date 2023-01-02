@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Context } from "./Context/context.js";
+import { Context } from "./components/Context/context";
 import { fetchItemsData } from "./components/API/Requests";
 import Layout from "./components/Layout/Layout.jsx";
-import Shop from "./components/Shop/Shop";
-import Favorite from "./components/Favorite/Favorite.jsx";
-import Profile from "./components/Profile/Profile.jsx";
+import Shop from "./components/Layout/Shop/Shop.jsx";
+import Favorite from "./components/Layout/Favorite/Favorite.jsx";
+import Profile from "./components/Layout/Profile/Profile.jsx";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -15,6 +15,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
   const [addedFavorite, setAddedFavorite] = useState([]);
+  const [purchasedItems, setPurchasedItems] = useState([]);
 
   const [error, setError] = useState("");
 
@@ -25,6 +26,7 @@ function App() {
       await fetchItemsData("items", setItems, setError);
       await fetchItemsData("cart", setAddedItems, setError);
       await fetchItemsData("favorite", setAddedFavorite, setError);
+      await fetchItemsData("purchases", setPurchasedItems, setError);
 
       setIsLoading(false);
     }
@@ -54,6 +56,8 @@ function App() {
         setAddedItems,
         addedFavorite,
         setAddedFavorite,
+        purchasedItems,
+        setPurchasedItems,
         setError,
       }}
     >

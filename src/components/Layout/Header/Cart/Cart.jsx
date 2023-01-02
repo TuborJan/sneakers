@@ -1,15 +1,31 @@
-import React, { useContext } from "react";
-import { Context } from "../../Context/context";
-import CartItem from "../CartItem/CartItem";
+import React, { useState, useContext } from "react";
+import { Context } from "../../../Context/context";
+import { deleteData, postData } from "../../../API/Requests";
+import CartItem from "./CartItem/CartItem";
 import styles from "./Cart.module.scss";
 
 const Cart = ({ setOpenCart, currentPrice }) => {
-  const { addedItems } = useContext(Context);
+  const { addedItems, setAddedItems, setPurchasedItems } = useContext(Context);
+
+  const [isPurchased, setIsPurchased] = useState(false);
 
   const closeModal = () => {
     setOpenCart(false);
     document.body.style.overflow = "visible";
     document.body.style.marginRight = "0px";
+  };
+
+  const makePurchase = () => {
+    for (let item of addedItems) {
+      async function purchase() {
+        await postData("purchases", item);
+        await deleteData("cart", item.id);
+        setAddedItems([]);
+        setPurchasedItems((prev) => [...prev, item]);
+      }
+      purchase();
+    }
+    setIsPurchased(true);
   };
 
   return (
@@ -40,7 +56,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
               <div className={styles.currentPrice}>{currentPrice} руб.</div>
             </div>
             <div className={styles.orderbutton}>
-              <button>
+              <button onClick={() => makePurchase()}>
                 Оформить заказ
                 <span className={styles.arrow}>
                   <img
@@ -48,6 +64,32 @@ const Cart = ({ setOpenCart, currentPrice }) => {
                     alt="arrow"
                   />
                 </span>{" "}
+              </button>
+            </div>
+          </div>
+        ) : isPurchased ? (
+          <div className={styles.empty}>
+            <div className={styles.purchaseImg}>
+              <img
+                src="https://i.postimg.cc/k53yR6sz/purchase.png"
+                alt="purchase complite"
+              />
+            </div>
+            <div className={styles.purchaseHeader}>
+              <h2>Заказ оформлен!</h2>
+            </div>
+            <div className={styles.description}>
+              Ваш заказ скоро будет передан курьерской службе доставки.
+            </div>
+            <div className={styles.button}>
+              <button onClick={closeModal}>
+                <span className={styles.arrow}>
+                  <img
+                    src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
+                    alt="arrow"
+                  />
+                </span>{" "}
+                Вернуться назад
               </button>
             </div>
           </div>
