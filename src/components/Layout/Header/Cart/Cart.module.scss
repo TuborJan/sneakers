@@ -196,3 +196,11 @@
 .cartscroll {
     padding: 2rem 0.4rem 2rem 1.87rem;
 }
+
+@media screen and (max-width: 425px) {
+    .cart {
+        width: 100vw;
+        height: 100vh;
+        padding: 2rem 1rem 5rem
+    }
+}

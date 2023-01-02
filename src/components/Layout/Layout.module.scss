@@ -12,3 +12,22 @@
         margin: 0 auto;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .App {
+
+        .container {
+            max-width: 690px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .App {
+        margin-top: 0;
+
+        .container {
+            max-width: 400px;
+        }
+    }
+}

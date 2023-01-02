@@ -23,12 +23,6 @@
     .items {
         display: flex;
         flex-wrap: wrap;
-
-        h1 {
-            margin: 0 auto;
-            padding-top: 1rem;
-            padding-bottom: 3rem;
-        }
     }
 
     .empty {
@@ -75,6 +69,18 @@
                     transform: translateX(-15px);
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .profile {
+        .header {
+            justify-content: center;
+        }
+
+        .items {
+            justify-content: center;
         }
     }
 }
