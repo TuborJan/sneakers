@@ -61,7 +61,7 @@ function App() {
         setError,
       }}
     >
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route
