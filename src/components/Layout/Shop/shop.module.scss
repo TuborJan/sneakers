@@ -1,0 +1,83 @@
+.shop {
+    padding-top: 2.5rem;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        input {
+            width: 250px;
+            padding: 0.93rem 1.12rem 0.93rem 2.87rem;
+            border: 1px solid #e3e3e3;
+            border-radius: 10px;
+            background: url("https://i.postimg.cc/QMysTj37/search.png") no-repeat 1.12rem 50%;
+        }
+
+        ::placeholder {
+            color: #e3e3e3;
+        }
+
+        input:focus {
+            border-color: #e3e3e3;
+            outline: none;
+        }
+    }
+
+    .ContentLoader {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .items {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .shop {
+        .header {
+            align-items: center;
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input {
+                width: 200px;
+            }
+        }
+
+        .items {
+            justify-content: space-between;
+        }
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .shop {
+        .header {
+            align-items: center;
+            justify-content: center;
+
+            h1 {
+                margin-right: 1.2rem;
+                font-size: 1.5rem;
+            }
+
+            input {
+                width: 150px;
+            }
+        }
+
+        .items {
+            justify-content: center;
+        }
+    }
+}

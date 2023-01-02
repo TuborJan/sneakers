@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Shop from "./components/Shop/Shop";
-import Header from "./components/Header/Header";
-import styles from "./styles/App.module.scss";
-import { Context } from "./Context/context.js";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Context } from "./components/Context/context";
+import { fetchItemsData } from "./components/API/Requests";
+import Layout from "./components/Layout/Layout.jsx";
+import Shop from "./components/Layout/Shop/Shop.jsx";
+import Favorite from "./components/Layout/Favorite/Favorite.jsx";
+import Profile from "./components/Layout/Profile/Profile.jsx";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
-
-  //Update data
-  const [updateData, setUpdateData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Data from server
   const [items, setItems] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
+  const [addedFavorite, setAddedFavorite] = useState([]);
+  const [purchasedItems, setPurchasedItems] = useState([]);
 
-  const [errorCard, setErrorCard] = useState("");
-  const [errorCart, setErrorCart] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      const responseItems = await axios.get(
-        "https://63a57287318b23efa793b328.mockapi.io/items"
-      );
-      const responseCart = await axios.get(
-        "https://63a57287318b23efa793b328.mockapi.io/Cart"
-      );
+      setIsLoading(true);
 
-      setAddedItems(responseCart.data);
-      setErrorCart(responseCart.error);
+      await fetchItemsData("items", setItems, setError);
+      await fetchItemsData("cart", setAddedItems, setError);
+      await fetchItemsData("favorite", setAddedFavorite, setError);
+      await fetchItemsData("purchases", setPurchasedItems, setError);
 
-      setItems(responseItems.data);
-      setErrorCard(responseItems.error);
+      setIsLoading(false);
     }
 
     fetchData();
-  }, [updateData]);
+  }, []);
 
   //Update total price
   useEffect(() => {
@@ -57,16 +54,27 @@ function App() {
         setCurrentPrice,
         addedItems,
         setAddedItems,
-        updateData,
-        setUpdateData,
+        addedFavorite,
+        setAddedFavorite,
+        purchasedItems,
+        setPurchasedItems,
+        setError,
       }}
     >
-      <div className={styles.App}>
-        <Header errorCart={errorCart} />
-        <main className={styles.container}>
-          <Shop items={items} error={errorCard} />;
-        </main>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <Shop items={items} error={error} isLoading={isLoading} />
+              }
+            />
+            <Route path="favorite" element={<Favorite />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Context.Provider>
   );
 }
