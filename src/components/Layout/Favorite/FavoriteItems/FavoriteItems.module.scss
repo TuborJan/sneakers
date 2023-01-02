@@ -1,3 +1,12 @@
+.item {
+    margin-right: 2.5rem;
+
+    &:nth-child(4n) {
+        margin-right: 0;
+    }
+}
+
+
 .card {
     width: 210px;
     height: 260px;
