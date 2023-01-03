@@ -1,2 +1,2 @@
-# Create react project
+# Sneaker store
 https://tuborjan.github.io/sneakers/
