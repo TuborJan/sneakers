@@ -113,6 +113,7 @@
 
         .container {
             .logo {
+                align-items: center;
 
                 img {
                     margin-right: 0.5rem;
@@ -148,9 +149,11 @@
 @media screen and (max-width: 425px) {
     .header {
         .container {
+            max-width: 210px;
             flex-direction: column;
 
             .logo {
+                align-items: center;
                 margin-bottom: 1rem;
             }
 

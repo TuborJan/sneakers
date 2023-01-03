@@ -11,15 +11,12 @@ const Header = () => {
 
   const onOpenCart = () => {
     setOpenCart(!openCart);
-    if (!openCart) {
-      document.body.style.overflow = "hidden";
-      document.body.style.marginRight = "5px";
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "auto",
-      });
-    }
+    document.body.style.overflow = "hidden";
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
   };
 
   return (

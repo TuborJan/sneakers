@@ -194,13 +194,56 @@
 }
 
 .cartscroll {
-    padding: 2rem 0.4rem 2rem 1.87rem;
+    padding: 2rem 0.4rem 5rem 1.87rem;
 }
 
 @media screen and (max-width: 425px) {
     .cart {
         width: 100vw;
         height: 100vh;
-        padding: 2rem 1rem 5rem
+        padding: 1rem 0rem;
+
+        .header {
+            padding: 0 1rem;
+            height: 5vh;
+        }
+
+        .notAnEmpty {
+            margin-top: 0rem;
+            height: 90vh;
+
+            .cartItems {
+                height: 80%;
+            }
+
+            .price {
+                justify-content: center;
+                margin: 0 auto;
+                margin-top: 1rem;
+                padding: 0 0.4rem;
+
+                .dashed {
+                    width: 45%;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                }
+
+                .currentPrice {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .orderbutton {
+                margin: 0 auto;
+                margin-top: 1rem;
+                padding: 0 1rem;
+
+                button {
+                    padding: 0.7rem 1rem;
+                }
+            }
+        }
     }
 }

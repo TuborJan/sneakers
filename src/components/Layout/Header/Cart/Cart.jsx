@@ -12,7 +12,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
   const closeModal = () => {
     setOpenCart(false);
     document.body.style.overflow = "visible";
-    document.body.style.marginRight = "0px";
+    // document.body.style.marginRight = "0px";
   };
 
   const makePurchase = () => {

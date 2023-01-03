@@ -50,3 +50,27 @@
         }
     }
 }
+
+@media screen and (max-width: 425px) {
+    .cartItem {
+        width: 290px;
+        height: 95px;
+        margin: 0.5rem auto;
+        padding: 0.5rem;
+
+        .cartImg {
+            height: 70px;
+            margin-right: 1rem;
+        }
+
+        .info {
+            .description {
+                font-size: 0.8rem;
+            }
+
+            .price {
+                font-size: 0.7rem;
+            }
+        }
+    }
+}

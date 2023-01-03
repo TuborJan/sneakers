@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Context } from "./components/Context/context";
 import { fetchItemsData } from "./components/API/Requests";
 import Layout from "./components/Layout/Layout.jsx";
@@ -61,7 +61,7 @@ function App() {
         setError,
       }}
     >
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route
@@ -74,7 +74,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Context.Provider>
   );
 }

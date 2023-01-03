@@ -16,6 +16,7 @@
 
 body {
     background-color: #e7f6ff;
+    padding: 0 calc(5px - (100vw - 100%)) 0 0;
 }
 
 ul {
@@ -25,4 +26,10 @@ ul {
 a {
     color: #000000;
     text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 0;
+    }
 }
