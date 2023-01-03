@@ -19,6 +19,7 @@
     background-color: #ffffff;
 
     .header {
+        height: 4%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -39,12 +40,12 @@
     }
 
     .notAnEmpty {
-        height: 94%;
+        height: 86%;
         margin-top: 1.87rem;
 
 
         .cartItems {
-            height: 85%;
+            height: 80%;
         }
 
         .scrollbar {
