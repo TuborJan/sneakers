@@ -1,18 +1,13 @@
-import React, { useContext } from "react";
-import { Context } from "../../../Context/context";
-import { addToServer } from "../../../functions/addItems";
 import ContentLoader from "react-content-loader";
-import styles from "./Card.module.scss";
+import styles from "../../styles/Shop/Card.module.scss";
+import { memo } from "react";
 
-const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
-  const {
-    addedItems,
-    setAddedItems,
-    addedFavorite,
-    setAddedFavorite,
-    setError,
-  } = useContext(Context);
-
+export const Card = ({
+  item,
+  isLoading,
+  toggleIsFavorite,
+  toggleIsAddedToCart,
+}) => {
   return (
     <div className={styles.item}>
       {isLoading ? (
@@ -35,9 +30,7 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
       ) : (
         <div
           className={
-            isItemAdded(item.parentid)
-              ? `${styles.active} ${styles.card}`
-              : styles.card
+            item.isAddedToCart ? `${styles.active} ${styles.card}` : styles.card
           }
         >
           <div>
@@ -49,17 +42,9 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
               }}
             >
               <img
-                onClick={() =>
-                  addToServer(
-                    item,
-                    addedFavorite,
-                    setAddedFavorite,
-                    setError,
-                    "favorite"
-                  )
-                }
+                onClick={() => toggleIsFavorite(item)}
                 src={
-                  isItemFavorite(item.parentid)
+                  item.isFavorite
                     ? "https://i.postimg.cc/L6tHbdtd/favorite.png"
                     : "https://i.postimg.cc/sfSyMF0B/unfavorite.png"
                 }
@@ -74,17 +59,9 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
                   <span className={styles.bolder}>{`${item.price} руб.`}</span>
                 </p>
                 <img
-                  onClick={() =>
-                    addToServer(
-                      item,
-                      addedItems,
-                      setAddedItems,
-                      setError,
-                      "cart"
-                    )
-                  }
+                  onClick={() => toggleIsAddedToCart(item)}
                   src={
-                    isItemAdded(item.parentid)
+                    item.isAddedToCart
                       ? "https://i.postimg.cc/T3TR8k0K/addactive.png"
                       : "https://i.postimg.cc/nLzprC6Z/add.png"
                   }
@@ -98,5 +75,3 @@ const Card = ({ item, isItemAdded, isItemFavorite, isLoading = true }) => {
     </div>
   );
 };
-
-export default Card;

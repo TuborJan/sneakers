@@ -1,4 +1,4 @@
-import { deleteData, postData, fetchItemsData } from "../API/Requests";
+import { deleteData, postData, fetchItemsData } from "../Service/API/Requests";
 
 export const addToServer = (
   item,

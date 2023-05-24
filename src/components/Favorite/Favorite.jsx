@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../../Context/context";
 import { Link } from "react-router-dom";
-import FavoriteItems from "./FavoriteItems/FavoriteItems";
+import FavoriteItems from "./FavoriteItems";
 import styles from "./Favorite.module.scss";
 
 const Favorite = () => {

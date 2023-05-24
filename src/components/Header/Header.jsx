@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../../Context/context";
-import Cart from "../Header/Cart/Cart";
-import styles from "./Header.module.scss";
+// import { Context } from "../../Service/Context/context";
+import Cart from "../Cart/Cart";
+import styles from "../../styles/Header/Header.module.scss";
 
 const Header = () => {
-  const { currentPrice } = useContext(Context);
+  // const { currentPrice } = useContext(Context);
 
   const [openCart, setOpenCart] = useState(false);
 
@@ -63,7 +63,8 @@ const Header = () => {
               />
             </svg>
 
-            <span className={styles.price}>{currentPrice} руб.</span>
+            {/* <span className={styles.price}>{currentPrice} руб.</span> */}
+            <span className={styles.price}>123 руб.</span>
           </div>
 
           <Link to="/favorite" className={styles.favorite}>
@@ -99,10 +100,9 @@ const Header = () => {
           </Link>
         </div>
       </div>
+      {/* <Cart setOpenCart={setOpenCart} currentPrice={currentPrice} /> */}
 
-      {openCart && (
-        <Cart setOpenCart={setOpenCart} currentPrice={currentPrice} />
-      )}
+      {/* {openCart && <Cart setOpenCart={setOpenCart} currentPrice={123} />} */}
     </header>
   );
 };

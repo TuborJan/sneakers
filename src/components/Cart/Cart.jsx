@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Context } from "../../../Context/context";
-import { deleteData, postData } from "../../../API/Requests";
-import CartItem from "./CartItem/CartItem";
-import styles from "./Cart.module.scss";
+// import { Context } from "../../../Service/Context/context";
+// import { deleteData, postData } from "../../../Service/API/Requests";
+// import CartItem from "./CartItem/CartItem";
+import styles from "../../styles/Cart/Cart.module.scss";
 
 const Cart = ({ setOpenCart, currentPrice }) => {
-  const { addedItems, setAddedItems, setPurchasedItems } = useContext(Context);
+  // const { addedItems, setAddedItems, setPurchasedItems } = useContext(Context);
 
   const [isPurchased, setIsPurchased] = useState(false);
 
@@ -15,18 +15,18 @@ const Cart = ({ setOpenCart, currentPrice }) => {
     // document.body.style.marginRight = "0px";
   };
 
-  const makePurchase = () => {
-    for (let item of addedItems) {
-      async function purchase() {
-        await postData("purchases", item);
-        await deleteData("cart", item.id);
-        setAddedItems([]);
-        setPurchasedItems((prev) => [...prev, item]);
-      }
-      purchase();
-    }
-    setIsPurchased(true);
-  };
+  // const makePurchase = () => {
+  //   for (let item of addedItems) {
+  //     async function purchase() {
+  //       await postData("purchases", item);
+  //       await deleteData("cart", item.id);
+  //       setAddedItems([]);
+  //       setPurchasedItems((prev) => [...prev, item]);
+  //     }
+  //     purchase();
+  //   }
+  //   setIsPurchased(true);
+  // };
 
   return (
     <div className={styles.modal} onClick={closeModal}>
@@ -42,7 +42,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
             onClick={closeModal}
           />
         </div>
-        {addedItems.length > 0 ? (
+        {/* {addedItems.length > 0 ? (
           <div className={styles.notAnEmpty}>
             <div className={`${styles.cartItems} ${styles.scrollbar}`}>
               {addedItems.map((item, index) => (
@@ -119,7 +119,32 @@ const Cart = ({ setOpenCart, currentPrice }) => {
               </button>
             </div>
           </div>
-        )}
+        )} */}
+        <div className={styles.empty}>
+          <div className={styles.emptyimg}>
+            <img
+              src="https://i.postimg.cc/qq8dSnCc/emptybox.png"
+              alt="empty box"
+            />
+          </div>
+          <div className={styles.emptyheader}>
+            <h2>Корзина пустая</h2>
+          </div>
+          <div className={styles.description}>
+            Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
+          </div>
+          <div className={styles.button}>
+            <button onClick={closeModal}>
+              <span className={styles.arrow}>
+                <img
+                  src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
+                  alt="arrow"
+                />
+              </span>{" "}
+              Вернуться назад
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

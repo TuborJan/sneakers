@@ -1,0 +1,98 @@
+[
+  {
+    "parentid": "1",
+    "url": "https://i.postimg.cc/yxXrHT6P/1.png",
+    "description": "Мужские Кроссовки Nike Blazer Mid Suede",
+    "price": 12999,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "2",
+    "url": "https://i.postimg.cc/qM45GWQZ/2.png",
+    "description": "Мужские Кроссовки Nike Air Max 270",
+    "price": 12999,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "3",
+    "url": "https://i.postimg.cc/QNpz1jgT/3.png",
+    "description": "Мужские Кроссовки Nike Blazer Mid Suede",
+    "price": 8499,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "4",
+    "url": "https://i.postimg.cc/RZbp4hmj/4.png",
+    "description": "Кроссовки Puma X Aka Boku Future Rider",
+    "price": 8999,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "5",
+    "url": "https://i.postimg.cc/J4xdYK27/5.png",
+    "description": "Мужские Кроссовки Under Armour Curry 8",
+    "price": 15199,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "6",
+    "url": "https://i.postimg.cc/Dwzp9s9r/6.png",
+    "description": "Мужские Кроссовки Nike Kyrie 7",
+    "price": 11299,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "7",
+    "url": "https://i.postimg.cc/nLjRzxcM/7.png",
+    "description": "Мужские Кроссовки Jordan Air Jordan 11",
+    "price": 10799,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "8",
+    "url": "https://i.postimg.cc/6QkH4Pyc/8.png",
+    "description": "Мужские Кроссовки Nike LeBron XVIII",
+    "price": 16499,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "9",
+    "url": "https://i.postimg.cc/2ym22BdB/9.png",
+    "description": "Мужские Кроссовки Nike Lebron XVIII Low",
+    "price": 13999,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "10",
+    "url": "https://i.postimg.cc/yxXrHT6P/1.png",
+    "description": "Мужские Кроссовки Nike Blazer Mid Suede",
+    "price": 8499,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "11",
+    "url": "https://i.postimg.cc/RZbp4hmj/4.png",
+    "description": "Кроссовки Puma X Aka Boku Future Rider",
+    "price": 8999,
+    "isFavorite": false,
+    "isAddedToCart": false
+  },
+  {
+    "parentid": "12",
+    "url": "https://i.postimg.cc/L4ByhNRk/12.png",
+    "description": "Мужские Кроссовки Nike Kyrie Flytrap IV",
+    "price": 11299,
+    "isFavorite": false,
+    "isAddedToCart": false
+  }
+]
