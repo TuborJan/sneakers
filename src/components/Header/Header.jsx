@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useStore } from "effector-react";
+import { $productsCardStore } from "../../Service/Store/store";
 import { Link } from "react-router-dom";
 import { Cart } from "../Cart/Cart";
 import styles from "../../styles/Header/Header.module.scss";
 
 const Header = () => {
   const [openCart, setOpenCart] = useState(false);
+  const [addedItems, setAddedItems] = useState([]);
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const productsCardStore = useStore($productsCardStore);
+
+  //Set added items
+  useEffect(() => {
+    setAddedItems(productsCardStore.filter((item) => item.isAddedToCart));
+  }, [productsCardStore]);
+
+  //Total price
+  useEffect(() => {
+    let total = 0;
+    addedItems.map((item) => {
+      total += item.price;
+    });
+    setCurrentPrice(total);
+  }, [addedItems]);
 
   const onOpenCart = () => {
     setOpenCart(!openCart);
@@ -59,9 +78,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-
-            {/* <span className={styles.price}>{currentPrice} руб.</span> */}
-            <span className={styles.price}>123 руб.</span>
+            <span className={styles.price}>{currentPrice} руб.</span>
           </div>
 
           <Link to="/favorite" className={styles.favorite}>
@@ -97,7 +114,13 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      {openCart && <Cart setOpenCart={setOpenCart} currentPrice={123} />}
+      {openCart && (
+        <Cart
+          setOpenCart={setOpenCart}
+          currentPrice={currentPrice}
+          addedItems={addedItems}
+        />
+      )}
     </header>
   );
 };

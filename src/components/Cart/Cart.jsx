@@ -1,37 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CartItem from "./CartItem";
 import styles from "../../styles/Cart/Cart.module.scss";
-import { $productsCardStore } from "../../Service/Store/store";
-import { useStore } from "effector-react";
 
-export const Cart = ({ setOpenCart, currentPrice }) => {
+export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
   const [isPurchased, setIsPurchased] = useState(false);
-  const [addedItems, setAddedItems] = useState([]);
-  const productsCardStore = useStore($productsCardStore);
 
   const closeModal = () => {
     setOpenCart(false);
     document.body.style.overflow = "visible";
   };
-
-  useEffect(() => {
-    setAddedItems(productsCardStore.filter((item) => item.isAddedToCart));
-  }, [productsCardStore]);
-
-  console.log(addedItems);
-
-  // const makePurchase = () => {
-  //   for (let item of addedItems) {
-  //     async function purchase() {
-  //       await postData("purchases", item);
-  //       await deleteData("cart", item.id);
-  //       setAddedItems([]);
-  //       setPurchasedItems((prev) => [...prev, item]);
-  //     }
-  //     purchase();
-  //   }
-  //   setIsPurchased(true);
-  // };
 
   return (
     <div className={styles.modal} onClick={closeModal}>
