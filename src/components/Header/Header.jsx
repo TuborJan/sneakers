@@ -1,12 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { Context } from "../../Service/Context/context";
-import Cart from "../Cart/Cart";
+import { Cart } from "../Cart/Cart";
 import styles from "../../styles/Header/Header.module.scss";
 
 const Header = () => {
-  // const { currentPrice } = useContext(Context);
-
   const [openCart, setOpenCart] = useState(false);
 
   const onOpenCart = () => {
@@ -31,7 +28,7 @@ const Header = () => {
         </Link>
 
         <div className={styles.option}>
-          <div className={styles.priceBlock} onClick={onOpenCart}>
+          <div className={styles.priceBlock} onClick={() => onOpenCart()}>
             <svg
               className={styles.cart}
               width="20"
@@ -100,9 +97,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      {/* <Cart setOpenCart={setOpenCart} currentPrice={currentPrice} /> */}
-
-      {/* {openCart && <Cart setOpenCart={setOpenCart} currentPrice={123} />} */}
+      {openCart && <Cart setOpenCart={setOpenCart} currentPrice={123} />}
     </header>
   );
 };

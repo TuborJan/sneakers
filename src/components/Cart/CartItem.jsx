@@ -1,16 +1,6 @@
-import React, { useContext } from "react";
-import { Context } from "../../../../Service/Context/context";
-import { deleteData } from "../../../../Service/API/Requests";
-import styles from "./CartItem.module.scss";
+import styles from "../../styles/Cart/CartItem.module.scss";
 
 const CartItem = ({ item }) => {
-  const { setAddedItems } = useContext(Context);
-
-  const deleteItem = (id) => {
-    deleteData("cart", id);
-    setAddedItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
   return (
     <div className={styles.cartItem}>
       <div className={styles.cartImg}>
@@ -22,7 +12,6 @@ const CartItem = ({ item }) => {
       </div>
       <div className={styles.deleteBtn}>
         <img
-          onClick={() => deleteItem(item.id)}
           src="https://i.postimg.cc/MHkS9tXK/exitbtn.png"
           alt="delete button"
         />

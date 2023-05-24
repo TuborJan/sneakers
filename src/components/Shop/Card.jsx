@@ -1,6 +1,5 @@
 import ContentLoader from "react-content-loader";
 import styles from "../../styles/Shop/Card.module.scss";
-import { memo } from "react";
 
 export const Card = ({
   item,

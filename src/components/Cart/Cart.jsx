@@ -1,19 +1,24 @@
-import React, { useState, useContext } from "react";
-// import { Context } from "../../../Service/Context/context";
-// import { deleteData, postData } from "../../../Service/API/Requests";
-// import CartItem from "./CartItem/CartItem";
+import React, { useEffect, useState } from "react";
+import CartItem from "./CartItem";
 import styles from "../../styles/Cart/Cart.module.scss";
+import { $productsCardStore } from "../../Service/Store/store";
+import { useStore } from "effector-react";
 
-const Cart = ({ setOpenCart, currentPrice }) => {
-  // const { addedItems, setAddedItems, setPurchasedItems } = useContext(Context);
-
+export const Cart = ({ setOpenCart, currentPrice }) => {
   const [isPurchased, setIsPurchased] = useState(false);
+  const [addedItems, setAddedItems] = useState([]);
+  const productsCardStore = useStore($productsCardStore);
 
   const closeModal = () => {
     setOpenCart(false);
     document.body.style.overflow = "visible";
-    // document.body.style.marginRight = "0px";
   };
+
+  useEffect(() => {
+    setAddedItems(productsCardStore.filter((item) => item.isAddedToCart));
+  }, [productsCardStore]);
+
+  console.log(addedItems);
 
   // const makePurchase = () => {
   //   for (let item of addedItems) {
@@ -42,7 +47,7 @@ const Cart = ({ setOpenCart, currentPrice }) => {
             onClick={closeModal}
           />
         </div>
-        {/* {addedItems.length > 0 ? (
+        {addedItems.length > 0 ? (
           <div className={styles.notAnEmpty}>
             <div className={`${styles.cartItems} ${styles.scrollbar}`}>
               {addedItems.map((item, index) => (
@@ -56,7 +61,8 @@ const Cart = ({ setOpenCart, currentPrice }) => {
               <div className={styles.currentPrice}>{currentPrice} руб.</div>
             </div>
             <div className={styles.orderbutton}>
-              <button onClick={() => makePurchase()}>
+              {/* <button onClick={() => makePurchase()}> */}
+              <button>
                 Оформить заказ
                 <span className={styles.arrow}>
                   <img
@@ -119,35 +125,8 @@ const Cart = ({ setOpenCart, currentPrice }) => {
               </button>
             </div>
           </div>
-        )} */}
-        <div className={styles.empty}>
-          <div className={styles.emptyimg}>
-            <img
-              src="https://i.postimg.cc/qq8dSnCc/emptybox.png"
-              alt="empty box"
-            />
-          </div>
-          <div className={styles.emptyheader}>
-            <h2>Корзина пустая</h2>
-          </div>
-          <div className={styles.description}>
-            Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-          </div>
-          <div className={styles.button}>
-            <button onClick={closeModal}>
-              <span className={styles.arrow}>
-                <img
-                  src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
-                  alt="arrow"
-                />
-              </span>{" "}
-              Вернуться назад
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
-
-export default Cart;
