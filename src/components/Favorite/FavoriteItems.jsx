@@ -1,24 +1,19 @@
-import React, { useContext } from "react";
-import { Context } from "../../../Context/context";
-import { addToServer } from "../../../functions/addItems";
-import styles from "./FavoriteItems.module.scss";
+import { useStore } from "effector-react";
+import {
+  toggleIsAddedToCart,
+  toggleIsFavorite,
+} from "../../Service/Functions/toggleItems";
+import styles from "../../styles/Favorite/FavoriteItems.module.scss";
+import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
 
-const FavoriteItems = ({ item, isItemAdded }) => {
-  const {
-    addedItems,
-    setAddedItems,
-    addedFavorite,
-    setAddedFavorite,
-    setError,
-  } = useContext(Context);
+export const FavoriteItems = ({ item }) => {
+  const productsCards = useStore($productsCardStore);
 
   return (
     <div className={styles.item}>
       <div
         className={
-          isItemAdded(item.parentid)
-            ? `${styles.active} ${styles.card}`
-            : styles.card
+          item.isAddedToCart ? `${styles.active} ${styles.card}` : styles.card
         }
       >
         <div>
@@ -31,13 +26,7 @@ const FavoriteItems = ({ item, isItemAdded }) => {
           >
             <img
               onClick={() =>
-                addToServer(
-                  item,
-                  addedFavorite,
-                  setAddedFavorite,
-                  setError,
-                  "favorite"
-                )
+                toggleIsFavorite(item, productsCards, setProductsCard)
               }
               src={"https://i.postimg.cc/L6tHbdtd/favorite.png"}
               alt="favorite icon"
@@ -52,10 +41,10 @@ const FavoriteItems = ({ item, isItemAdded }) => {
               </p>
               <img
                 onClick={() =>
-                  addToServer(item, addedItems, setAddedItems, setError, "cart")
+                  toggleIsAddedToCart(item, productsCards, setProductsCard)
                 }
                 src={
-                  isItemAdded(item.parentid)
+                  item.isAddedToCart
                     ? "https://i.postimg.cc/T3TR8k0K/addactive.png"
                     : "https://i.postimg.cc/nLzprC6Z/add.png"
                 }
@@ -68,5 +57,3 @@ const FavoriteItems = ({ item, isItemAdded }) => {
     </div>
   );
 };
-
-export default FavoriteItems;

@@ -50,6 +50,11 @@ const Header = () => {
     setIsPurchased(true);
   };
 
+  // useEffect(() => {
+  //   console.log(productsCard);
+  //   console.log(addedItems);
+  // }, [productsCard, addedItems]);
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>

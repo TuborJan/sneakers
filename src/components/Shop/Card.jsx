@@ -1,12 +1,15 @@
 import ContentLoader from "react-content-loader";
 import styles from "../../styles/Shop/Card.module.scss";
-
-export const Card = ({
-  item,
-  isLoading,
-  toggleIsFavorite,
+import {
   toggleIsAddedToCart,
-}) => {
+  toggleIsFavorite,
+} from "../../Service/Functions/toggleItems";
+import { useStore } from "effector-react";
+import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
+
+export const Card = ({ item, isLoading }) => {
+  const productsCards = useStore($productsCardStore);
+
   return (
     <div className={styles.item}>
       {isLoading ? (
@@ -41,7 +44,9 @@ export const Card = ({
               }}
             >
               <img
-                onClick={() => toggleIsFavorite(item)}
+                onClick={() =>
+                  toggleIsFavorite(item, productsCards, setProductsCard)
+                }
                 src={
                   item.isFavorite
                     ? "https://i.postimg.cc/L6tHbdtd/favorite.png"
@@ -58,7 +63,9 @@ export const Card = ({
                   <span className={styles.bolder}>{`${item.price} руб.`}</span>
                 </p>
                 <img
-                  onClick={() => toggleIsAddedToCart(item)}
+                  onClick={() =>
+                    toggleIsAddedToCart(item, productsCards, setProductsCard)
+                  }
                   src={
                     item.isAddedToCart
                       ? "https://i.postimg.cc/T3TR8k0K/addactive.png"

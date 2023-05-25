@@ -12,16 +12,6 @@ export const Shop = ({ error, isLoading }) => {
     setSearchValue(event.target.value);
   };
 
-  const toggleIsFavorite = (item) => {
-    item.isFavorite = !item.isFavorite;
-    setProductsCard([...productsCards]);
-  };
-
-  const toggleIsAddedToCart = (item) => {
-    item.isAddedToCart = !item.isAddedToCart;
-    setProductsCard([...productsCards]);
-  };
-
   //Render products card
   const renderItems = (productsCards) => {
     productsCards = productsCards.filter((item) =>
@@ -31,13 +21,7 @@ export const Shop = ({ error, isLoading }) => {
     return (
       <div className={styles.items}>
         {(isLoading ? [...Array(8)] : productsCards).map((item, index) => (
-          <Card
-            key={index}
-            item={item}
-            isLoading={isLoading}
-            toggleIsFavorite={toggleIsFavorite}
-            toggleIsAddedToCart={toggleIsAddedToCart}
-          />
+          <Card key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
     );

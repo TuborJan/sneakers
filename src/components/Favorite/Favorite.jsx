@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
-import { Context } from "../../Context/context";
 import { Link } from "react-router-dom";
-import FavoriteItems from "./FavoriteItems";
-import styles from "./Favorite.module.scss";
+import { FavoriteItems } from "./FavoriteItems";
+import styles from "../../styles/Favorite/Favorite.module.scss";
+import { useEffect, useState } from "react";
+import { $productsCardStore } from "../../Service/Store/store";
+import { useStore } from "effector-react";
 
-const Favorite = () => {
-  const { addedFavorite, addedItems } = useContext(Context);
+export const Favorite = () => {
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const productsCard = useStore($productsCardStore);
 
-  const isItemAdded = (id) => {
-    return addedItems.some((obj) => obj.parentid === id);
-  };
+  useEffect(() => {
+    setFavoriteItems(productsCard.filter((item) => item.isFavorite));
+  }, [productsCard]);
 
   return (
     <div className={styles.favorite}>
-      {addedFavorite.length > 0 ? (
+      {favoriteItems.length > 0 ? (
         <div className={styles.notEmpty}>
           <div className={styles.header}>
             <Link to="/">
@@ -25,12 +27,8 @@ const Favorite = () => {
             <h1>Мои закладки</h1>
           </div>
           <div className={styles.items}>
-            {addedFavorite.map((item, index) => (
-              <FavoriteItems
-                key={index}
-                item={item}
-                isItemAdded={isItemAdded}
-              />
+            {favoriteItems.map((item, index) => (
+              <FavoriteItems key={index} item={item} />
             ))}
           </div>
         </div>
@@ -49,5 +47,3 @@ const Favorite = () => {
     </div>
   );
 };
-
-export default Favorite;

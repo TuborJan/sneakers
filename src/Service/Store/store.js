@@ -34,3 +34,5 @@ $purchasedItemsStore.on(setPurchasedItems, (state, data) => {
   state = data;
   return state;
 });
+
+setPurchasedItems.watch(purchasedItemsLocalStorage);

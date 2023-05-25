@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./Layout/Layout";
+import { useStore } from "effector-react";
+import { $productsCardStore } from "./Service/Store/store";
 import { Shop } from "./components/Shop/Shop";
 import { getItemsData } from "./Service/API/Requests";
-import { $productsCardStore } from "./Service/Store/store";
-import { useStore } from "effector-react";
-// import Favorite from "./components/Layout/Favorite/Favorite.jsx";
+import Layout from "./Layout/Layout";
+import { Favorite } from "./components/Favorite/Favorite";
 // import Profile from "./components/Layout/Profile/Profile.jsx";
 
 function App() {
@@ -27,8 +27,8 @@ function App() {
           index
           element={<Shop error={productsError} isLoading={isLoading} />}
         />
-        {/* <Route path="favorite" element={<Favorite />} />
-            <Route path="profile" element={<Profile />} /> */}
+        <Route path="favorite" element={<Favorite />} />
+        {/* <Route path="profile" element={<Profile />} /> */}
       </Route>
     </Routes>
   );
