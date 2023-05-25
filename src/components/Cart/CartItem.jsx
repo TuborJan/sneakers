@@ -1,6 +1,15 @@
 import styles from "../../styles/Cart/CartItem.module.scss";
+import { useStore } from "effector-react";
+import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
 
 const CartItem = ({ item }) => {
+  const productsCards = useStore($productsCardStore);
+
+  const toggleIsAddedToCart = (item) => {
+    item.isAddedToCart = !item.isAddedToCart;
+    setProductsCard([...productsCards]);
+  };
+
   return (
     <div className={styles.cartItem}>
       <div className={styles.cartImg}>
@@ -12,6 +21,7 @@ const CartItem = ({ item }) => {
       </div>
       <div className={styles.deleteBtn}>
         <img
+          onClick={() => toggleIsAddedToCart(item)}
           src="https://i.postimg.cc/MHkS9tXK/exitbtn.png"
           alt="delete button"
         />

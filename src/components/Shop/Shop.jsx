@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStore } from "effector-react";
 import styles from "../../styles/Shop/shop.module.scss";
 import { Card } from "./Card";

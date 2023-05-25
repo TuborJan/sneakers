@@ -1,5 +1,5 @@
 import { createEvent, createStore } from "effector";
-import connectLocalStorage from "effector-localstorage";
+import connectLocalStorage from "effector-localstorage/sync";
 
 //Products Card
 export const setProductsCard = createEvent();
@@ -16,6 +16,8 @@ $productsCardStore.on(setProductsCard, (state, data) => {
   state = data;
   return state;
 });
+
+setProductsCard.watch(productsCardLocalStorage);
 
 //Purchased items
 export const setPurchasedItems = createEvent();

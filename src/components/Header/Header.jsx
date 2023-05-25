@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "effector-react";
-import { $productsCardStore } from "../../Service/Store/store";
+import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
 import { Link } from "react-router-dom";
 import { Cart } from "../Cart/Cart";
 import styles from "../../styles/Header/Header.module.scss";
@@ -8,13 +8,14 @@ import styles from "../../styles/Header/Header.module.scss";
 const Header = () => {
   const [openCart, setOpenCart] = useState(false);
   const [addedItems, setAddedItems] = useState([]);
+  const [isPurchased, setIsPurchased] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(0);
-  const productsCardStore = useStore($productsCardStore);
+  const productsCard = useStore($productsCardStore);
 
   //Set added items
   useEffect(() => {
-    setAddedItems(productsCardStore.filter((item) => item.isAddedToCart));
-  }, [productsCardStore]);
+    setAddedItems(productsCard.filter((item) => item.isAddedToCart));
+  }, [productsCard]);
 
   //Total price
   useEffect(() => {
@@ -25,14 +26,28 @@ const Header = () => {
     setCurrentPrice(total);
   }, [addedItems]);
 
-  const onOpenCart = () => {
-    setOpenCart(!openCart);
-    document.body.style.overflow = "hidden";
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto",
+  const toggleCart = () => {
+    if (openCart) {
+      setOpenCart(false);
+      document.body.style.overflow = "visible";
+    } else {
+      setOpenCart(!openCart);
+      document.body.style.overflow = "hidden";
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+    }
+  };
+
+  const makePurchase = () => {
+    productsCard.filter((item) => {
+      if (item.isAddedToCart === true) item.isAddedToCart = false;
     });
+    setProductsCard([...productsCard]);
+    setAddedItems([]);
+    setIsPurchased(true);
   };
 
   return (
@@ -45,9 +60,8 @@ const Header = () => {
             Магазин лучших кросовок
           </div>
         </Link>
-
         <div className={styles.option}>
-          <div className={styles.priceBlock} onClick={() => onOpenCart()}>
+          <div className={styles.priceBlock} onClick={() => toggleCart()}>
             <svg
               className={styles.cart}
               width="20"
@@ -80,7 +94,6 @@ const Header = () => {
             </svg>
             <span className={styles.price}>{currentPrice} руб.</span>
           </div>
-
           <Link to="/favorite" className={styles.favorite}>
             <svg
               width="22"
@@ -95,7 +108,6 @@ const Header = () => {
               />
             </svg>
           </Link>
-
           <Link to="/profile" className={styles.profile}>
             <svg
               width="20"
@@ -116,9 +128,11 @@ const Header = () => {
       </div>
       {openCart && (
         <Cart
-          setOpenCart={setOpenCart}
           currentPrice={currentPrice}
           addedItems={addedItems}
+          isPurchased={isPurchased}
+          toggleCart={toggleCart}
+          makePurchase={makePurchase}
         />
       )}
     </header>

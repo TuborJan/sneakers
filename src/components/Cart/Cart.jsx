@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import CartItem from "./CartItem";
 import styles from "../../styles/Cart/Cart.module.scss";
 
-export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
-  const [isPurchased, setIsPurchased] = useState(false);
-
-  const closeModal = () => {
-    setOpenCart(false);
-    document.body.style.overflow = "visible";
-  };
-
+export const Cart = ({
+  currentPrice,
+  addedItems,
+  isPurchased,
+  toggleCart,
+  makePurchase,
+}) => {
   return (
-    <div className={styles.modal} onClick={closeModal}>
+    <div className={styles.modal} onClick={() => toggleCart()}>
       <div
         className={`${styles.cart} ${styles.cartscroll}`}
         onClick={(e) => e.stopPropagation()}
@@ -21,7 +20,7 @@ export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
           <img
             src="https://i.postimg.cc/MHkS9tXK/exitbtn.png"
             alt="exit"
-            onClick={closeModal}
+            onClick={() => toggleCart()}
           />
         </div>
         {addedItems.length > 0 ? (
@@ -31,15 +30,13 @@ export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
                 <CartItem item={item} key={index} />
               ))}
             </div>
-
             <div className={styles.price}>
               <p>Итого:</p>
               <span className={styles.dashed}></span>
               <div className={styles.currentPrice}>{currentPrice} руб.</div>
             </div>
             <div className={styles.orderbutton}>
-              {/* <button onClick={() => makePurchase()}> */}
-              <button>
+              <button onClick={() => makePurchase()}>
                 Оформить заказ
                 <span className={styles.arrow}>
                   <img
@@ -65,7 +62,7 @@ export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
               Ваш заказ скоро будет передан курьерской службе доставки.
             </div>
             <div className={styles.button}>
-              <button onClick={closeModal}>
+              <button onClick={() => toggleCart()}>
                 <span className={styles.arrow}>
                   <img
                     src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
@@ -91,7 +88,7 @@ export const Cart = ({ setOpenCart, currentPrice, addedItems }) => {
               Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
             </div>
             <div className={styles.button}>
-              <button onClick={closeModal}>
+              <button onClick={() => toggleCart()}>
                 <span className={styles.arrow}>
                   <img
                     src="https://i.postimg.cc/NjbQQ1Cp/arrow.png"
