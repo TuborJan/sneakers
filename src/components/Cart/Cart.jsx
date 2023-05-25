@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import CartItem from "./CartItem";
 import styles from "../../styles/Cart/Cart.module.scss";
 

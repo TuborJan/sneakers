@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Context } from "../../Context/context";
 import { Link } from "react-router-dom";
-import PurchasedIteItems from "./PurchasedItems/PurchasedItems";
-import styles from "./Profile.module.scss";
+import { PurchasedItems } from "./PurchasedItems";
+import styles from "../../styles/Profile/Profile.module.scss";
+import { $purchasedItemsStore } from "../../Service/Store/store";
+import { useStore } from "effector-react";
 
-const Profile = () => {
-  const { purchasedItems } = useContext(Context);
+export const Profile = () => {
+  const purchasedItems = useStore($purchasedItemsStore);
 
   return (
     <div className={styles.profile}>
@@ -22,7 +22,7 @@ const Profile = () => {
           </div>
           <div className={styles.items}>
             {purchasedItems.map((item, index) => (
-              <PurchasedIteItems key={index} item={item} />
+              <PurchasedItems key={index} item={item} />
             ))}
           </div>
         </div>
@@ -41,5 +41,3 @@ const Profile = () => {
     </div>
   );
 };
-
-export default Profile;

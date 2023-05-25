@@ -6,7 +6,7 @@ import { Shop } from "./components/Shop/Shop";
 import { getItemsData } from "./Service/API/Requests";
 import Layout from "./Layout/Layout";
 import { Favorite } from "./components/Favorite/Favorite";
-// import Profile from "./components/Layout/Profile/Profile.jsx";
+import { Profile } from "./components/Profile/Profile";
 
 function App() {
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -28,7 +28,7 @@ function App() {
           element={<Shop error={productsError} isLoading={isLoading} />}
         />
         <Route path="favorite" element={<Favorite />} />
-        {/* <Route path="profile" element={<Profile />} /> */}
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   );

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useStore } from "effector-react";
 import styles from "../../styles/Shop/shop.module.scss";
 import { Card } from "./Card";
-import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
+import { $productsCardStore } from "../../Service/Store/store";
 
 export const Shop = ({ error, isLoading }) => {
   const [searchValue, setSearchValue] = useState("");

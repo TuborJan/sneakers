@@ -1,11 +1,6 @@
-import React, { useContext } from "react";
-import { Context } from "../../../Context/context";
-import { addToServer } from "../../../functions/addItems";
-import styles from "./PurchasedItems.module.scss";
+import styles from "../../styles/Profile/PurchasedItems.module.scss";
 
-const PurchasedItems = ({ item }) => {
-  const { purchasedItems, setPurchasedItems, setError } = useContext(Context);
-
+export const PurchasedItems = ({ item }) => {
   return (
     <div className={styles.item}>
       <div className={styles.card}>
@@ -16,21 +11,7 @@ const PurchasedItems = ({ item }) => {
               backgroundImage: `url(${item.url})`,
               backgroundRepeat: "no-repeat",
             }}
-          >
-            <img
-              onClick={() =>
-                addToServer(
-                  item,
-                  purchasedItems,
-                  setPurchasedItems,
-                  setError,
-                  "purchases"
-                )
-              }
-              src={"https://i.postimg.cc/MHkS9tXK/exitbtn.png"}
-              alt="delete btn"
-            />
-          </div>
+          ></div>
           <div className={styles.info}>
             <h3>{item.description}</h3>
             <div className={styles.price}>
@@ -45,5 +26,3 @@ const PurchasedItems = ({ item }) => {
     </div>
   );
 };
-
-export default PurchasedItems;

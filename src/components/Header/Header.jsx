@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "effector-react";
-import { $productsCardStore, setProductsCard } from "../../Service/Store/store";
+import {
+  $productsCardStore,
+  setProductsCard,
+  setPurchasedItems,
+} from "../../Service/Store/store";
 import { Link } from "react-router-dom";
 import { Cart } from "../Cart/Cart";
 import styles from "../../styles/Header/Header.module.scss";
@@ -42,6 +46,7 @@ const Header = () => {
   };
 
   const makePurchase = () => {
+    setPurchasedItems([...addedItems]);
     productsCard.filter((item) => {
       if (item.isAddedToCart === true) item.isAddedToCart = false;
     });
